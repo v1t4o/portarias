@@ -27,3 +27,4 @@ $factory->define(User::class, function (Faker $faker) {
         'codigo_vigia' => $faker->unique()->randomNumber,
     ];
 });
+

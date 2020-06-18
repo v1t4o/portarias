@@ -12,9 +12,22 @@ class OcorrenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        /* A data chegará assim: 25/02/2019 -> ocorrências desse dia */
+        # 25/02/2019: 2019-02-25 00:00:00 até 2019-02-25 23:59:59
+        # 2017-07-13 22:03:21
+        if ($request->search != null) {
+ 
+            $pesquisa = implode('-',array_reverse(explode('/',$request->search)));   
+            dd($ocorrencias = Ocorrencia::whereBetween('data_ocorrencia', array($pesquisa, $pesquisa))->toSql());
+            $pesquisa = '2020-06-18';
+            $ocorrencias = Ocorrencia::whereBetween('data_ocorrencia', array($pesquisa, $pesquisa))->paginate(10);
+        } else {
+            $ocorrencias = Ocorrencia::paginate(10);
+        }        
+        return view('ocorrencias.index')->with("ocorrencias",$ocorrencias); 
+
     }
 
     /**
