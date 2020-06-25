@@ -29,7 +29,7 @@
    <td>{{$ocorrencia->comentario}}</td>
    <td>{{$ocorrencia->user_id}}</td>
    <td>{{$ocorrencia->data_ocorrencia}}</td> 
-   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a></td> 
+   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a><a href="/ocorrencias/{{$ocorrencia->id}}"> Ver</a></td> 
    </tr>          
 @endforeach
 </table>

@@ -54,7 +54,7 @@ class OcorrenciaController extends Controller
         $ocorrencia->user_id = 1;
         $ocorrencia->save();
         
-        return redirect('/ocorrencias');
+        return redirect("/ocorrencias/$ocorrencia->id");
     }
 
     /**
@@ -65,7 +65,11 @@ class OcorrenciaController extends Controller
      */
     public function show(Ocorrencia $ocorrencia)
     {
-        //
+        $data = Carbon::parse($ocorrencia->data_ocorrencia)->format('d/m/Y');
+        $hora = Carbon::parse($ocorrencia->data_ocorrencia)->format('H:i');
+        $ocorrencia->data_ocorrencia = $data;
+        $ocorrencia->horario_ocorrencia = $hora;
+        return view('ocorrencias.show', compact('ocorrencia'));
     }
 
     /**
@@ -100,7 +104,7 @@ class OcorrenciaController extends Controller
         $ocorrencia->user_id = 1;
         $ocorrencia->save();
 
-        return redirect('/ocorrencias');
+        return redirect("/ocorrencias/$ocorrencia->id");
     }
 
     /**
