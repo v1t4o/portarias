@@ -1,4 +1,5 @@
-
+<a href="/ocorrencias/create">Cadastrar ocorrência<a>
+<br>
 <form method="get" action="/ocorrencias">
   <div class="row">
     <div class=" col-sm input-group">
@@ -25,7 +26,7 @@
    <td>{{$ocorrencia->patrimonio}}</td>
    <td>{{$ocorrencia->numero_serie}}</td>
    <td>{{$ocorrencia->comentario}}</td>
-   <td>{{$ocorrencia->user_id}}</td>
+   <td>{{$ocorrencia->user_id}}</td> <a href=""></a>
    <td>{{$ocorrencia->data_ocorrencia}}</td>   
    </tr>          
 @endforeach
