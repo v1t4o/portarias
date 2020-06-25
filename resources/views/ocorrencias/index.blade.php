@@ -18,7 +18,8 @@
    <th>Numero de Série</th>
    <th>Comentário</th>
    <th>ID</th>
-   <th>Data de Ocorrencia</th>         
+   <th>Data de Ocorrencia</th> 
+   <th>Ações</th>          
    </tr>
 @foreach ($ocorrencias as $ocorrencia)
    <tr>
@@ -26,8 +27,9 @@
    <td>{{$ocorrencia->patrimonio}}</td>
    <td>{{$ocorrencia->numero_serie}}</td>
    <td>{{$ocorrencia->comentario}}</td>
-   <td>{{$ocorrencia->user_id}}</td> <a href=""></a>
-   <td>{{$ocorrencia->data_ocorrencia}}</td>   
+   <td>{{$ocorrencia->user_id}}</td>
+   <td>{{$ocorrencia->data_ocorrencia}}</td> 
+   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a></td> 
    </tr>          
 @endforeach
 </table>

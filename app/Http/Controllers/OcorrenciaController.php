@@ -33,7 +33,7 @@ class OcorrenciaController extends Controller
      */
     public function create()
     {
-        return view ('ocorrencias/form');
+        return view('ocorrencias.create')->with('ocorrencia', new Ocorrencia);
     }
 
     /**
@@ -45,7 +45,7 @@ class OcorrenciaController extends Controller
     public function store(Request $request)
     {
         $ocorrencia = new Ocorrencia;
-        
+
         $ocorrencia->patrimonio = $request->patrimonio;
         $ocorrencia->data_ocorrencia = Carbon::CreatefromFormat('d/m/Y H:i', "$request->data_ocorrencia $request->horario_ocorrencia");
         $ocorrencia->numero_serie = $request->numero_serie;
@@ -76,7 +76,11 @@ class OcorrenciaController extends Controller
      */
     public function edit(Ocorrencia $ocorrencia)
     {
-        //
+        $data = Carbon::parse($ocorrencia->data_ocorrencia)->format('d/m/Y');
+        $hora = Carbon::parse($ocorrencia->data_ocorrencia)->format('H:i');
+        $ocorrencia->data_ocorrencia = $data;
+        $ocorrencia->horario_ocorrencia = $hora;
+        return view('ocorrencias.edit')->with('ocorrencia', $ocorrencia);
     }
 
     /**
@@ -88,7 +92,15 @@ class OcorrenciaController extends Controller
      */
     public function update(Request $request, Ocorrencia $ocorrencia)
     {
-        //
+        $ocorrencia->patrimonio = $request->patrimonio;
+        $ocorrencia->data_ocorrencia = Carbon::CreatefromFormat('d/m/Y H:i', "$request->data_ocorrencia $request->horario_ocorrencia");
+        $ocorrencia->numero_serie = $request->numero_serie;
+        $ocorrencia->tipo = $request->tipo;
+        $ocorrencia->comentario = $request->comentario;
+        $ocorrencia->user_id = 1;
+        $ocorrencia->save();
+
+        return redirect('/ocorrencias');
     }
 
     /**
