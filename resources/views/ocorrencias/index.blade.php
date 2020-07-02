@@ -1,17 +1,22 @@
+@extends('master')
+
+@section('content')
+@parent
 <a href="/ocorrencias/create">Cadastrar ocorrência<a>
 <br>
+<div class="row">
 <form method="get" action="/ocorrencias">
-  <div class="row">
     <div class=" col-sm input-group">
-      <input type="text" class="form-control" name="search" value="{{ Request()->search}}">
+      <input type="text" class="form-control datepicker" name="search" value="{{ Request()->search}}">
       <span class="input-group-btn">
         <button type="submit" class="btn btn-success"> Buscar </button>
       </span>
     </div>
-  </div>
 </form>
+</div>
 
-<table>
+
+<table class="table table-striped">
    <tr>
    <th>Tipo</th>
    <th>Patrimonio</th>
@@ -29,8 +34,7 @@
    <td>{{$ocorrencia->comentario}}</td>
    <td>{{$ocorrencia->user_id}}</td>
    <td>{{$ocorrencia->data_ocorrencia}}</td> 
-   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a><a href="/ocorrencias/{{$ocorrencia->id}}"> Ver</a></td>
-   <td>
+   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a><a href="/ocorrencias/{{$ocorrencia->id}}"> Ver</a>
       <form action="/ocorrencias/{{ $ocorrencia->id }} " method="post">
       @csrf  @method('delete')
       <button type="submit" onclick="return confirm('Tem certeza?');">Apagar</button> 
@@ -39,6 +43,12 @@
    </tr>          
 @endforeach
 </table>
-
+<div>
 {{$ocorrencias->appends(request()->query())->links()}}
+</div>
+
+@endsection
+
+
+
 

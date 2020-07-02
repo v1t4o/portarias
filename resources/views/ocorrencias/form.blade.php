@@ -6,7 +6,7 @@
 <input type="text" name="numero_serie" value="{{ $ocorrencia->numero_serie }}" id="numero_serie"><br>
 
 <label for="data_ocorrencia">Data de ocorrência</label>
-<input type="text" name="data_ocorrencia" value="{{ $ocorrencia->data_ocorrencia }}" id="data_ocorrencia"><br>
+<input type="text" class="datepicker" name="data_ocorrencia" value="{{ $ocorrencia->data_ocorrencia }}" id="data_ocorrencia"><br>
 <br>
 
 <label for="horario_ocorrencia">Horário da ocorrência</label>

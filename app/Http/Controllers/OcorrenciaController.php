@@ -13,16 +13,23 @@ class OcorrenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request)    
     {
+
+
         if ($request->search != null) {
+/*
+            $request->validate([
+                'abc' => 'required',
+            ]);
+*/
  
             $pesquisa = implode('-',array_reverse(explode('/',$request->search)));   
-            $ocorrencias = Ocorrencia::whereDate('data_ocorrencia', $pesquisa)->paginate(10);
+            $ = Ocorrencia::whereDate('data_ocorrencia', $pesquisa)->paginate(10);
         } else {
-            $ocorrencias = Ocorrencia::paginate(10);
+            $ = Ocorrencia::paginate(10);
         }        
-        return view('ocorrencias.index')->with("ocorrencias",$ocorrencias); 
+        return view('.index')->with("",$); 
 
     }
 
@@ -33,7 +40,7 @@ class OcorrenciaController extends Controller
      */
     public function create()
     {
-        return view('ocorrencias.create')->with('ocorrencia', new Ocorrencia);
+        return view('.create')->with('ocorrencia', new Ocorrencia);
     }
 
     /**
@@ -44,6 +51,7 @@ class OcorrenciaController extends Controller
      */
     public function store(Request $request)
     {
+        Ocorrencia::create($request->all())
         $ocorrencia = new Ocorrencia;
 
         $ocorrencia->patrimonio = $request->patrimonio;
@@ -54,7 +62,7 @@ class OcorrenciaController extends Controller
         $ocorrencia->user_id = 1;
         $ocorrencia->save();
         
-        return redirect("/ocorrencias/$ocorrencia->id");
+        return redirect("//$ocorrencia->id");
     }
 
     /**
@@ -69,22 +77,17 @@ class OcorrenciaController extends Controller
         $hora = Carbon::parse($ocorrencia->data_ocorrencia)->format('H:i');
         $ocorrencia->data_ocorrencia = $data;
         $ocorrencia->horario_ocorrencia = $hora;
-        return view('ocorrencias.show', compact('ocorrencia'));
+        return view('.show', compact('ocorrencia'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ocorrencia  $ocorrencia
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Ocorrencia $ocorrencia)
-    {
-        $data = Carbon::parse($ocorrencia->data_ocorrencia)->format('d/m/Y');
+     * @param  \App\OcoPróximoparse($ocorrencia->data_ocorrencia)->format('d/m/Y');
         $hora = Carbon::parse($ocorrencia->data_ocorrencia)->format('H:i');
         $ocorrencia->data_ocorrencia = $data;
         $ocorrencia->horario_ocorrencia = $hora;
-        return view('ocorrencias.edit')->with('ocorrencia', $ocorrencia);
+        return view('.edit')->with('ocorrencia', $ocorrencia);
     }
 
     /**
@@ -96,6 +99,7 @@ class OcorrenciaController extends Controller
      */
     public function update(Request $request, Ocorrencia $ocorrencia)
     {
+        
         $ocorrencia->patrimonio = $request->patrimonio;
         $ocorrencia->data_ocorrencia = Carbon::CreatefromFormat('d/m/Y H:i', "$request->data_ocorrencia $request->horario_ocorrencia");
         $ocorrencia->numero_serie = $request->numero_serie;
@@ -104,7 +108,7 @@ class OcorrenciaController extends Controller
         $ocorrencia->user_id = 1;
         $ocorrencia->save();
 
-        return redirect("/ocorrencias/$ocorrencia->id");
+        return redirect("//$ocorrencia->id");
     }
 
     /**
@@ -116,6 +120,6 @@ class OcorrenciaController extends Controller
     public function destroy(Ocorrencia $ocorrencia)
     {
         $ocorrencia->delete();
-        return redirect('/ocorrencias');
+        return redirect('/');
     }
 }
