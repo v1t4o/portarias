@@ -29,7 +29,13 @@
    <td>{{$ocorrencia->comentario}}</td>
    <td>{{$ocorrencia->user_id}}</td>
    <td>{{$ocorrencia->data_ocorrencia}}</td> 
-   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a><a href="/ocorrencias/{{$ocorrencia->id}}"> Ver</a></td> 
+   <td><a href="/ocorrencias/{{$ocorrencia->id}}/edit">Editar</a><a href="/ocorrencias/{{$ocorrencia->id}}"> Ver</a></td>
+   <td>
+      <form action="/ocorrencias/{{ $ocorrencia->id }} " method="post">
+      @csrf  @method('delete')
+      <button type="submit" onclick="return confirm('Tem certeza?');">Apagar</button> 
+      </form> 
+   </td>
    </tr>          
 @endforeach
 </table>

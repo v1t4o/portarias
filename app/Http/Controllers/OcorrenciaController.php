@@ -115,6 +115,7 @@ class OcorrenciaController extends Controller
      */
     public function destroy(Ocorrencia $ocorrencia)
     {
-        //
+        $ocorrencia->delete();
+        return redirect('/ocorrencias');
     }
 }
