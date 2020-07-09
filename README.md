@@ -1,7 +1,15 @@
-3. Encontro - 02/07/2020
+Mais um live condig STI FFLCH
 
-1 - (Augusto): Opção para deletar ocorrência
+Coloque seu nome:
 
-2 - (Ricardo): Implementação do template USP theme. Mostrar mensagem de flash com classes do bootstrap. Uso do datepicker do bootstrap.
+- Thiago
+- Victor
+- Arthur
+- laura
+- Gabriel
+- Marcos
+- Gabriela
+- Marisa
 
-3 - (Laura): Validação com FormRequest da ocorrência na criação e edição
+
+https://meet.google.com/zga-iwuz-ddj

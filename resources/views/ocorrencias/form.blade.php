@@ -18,12 +18,10 @@
 <br>
 
 <label for="tipo">Tipo:</label><br>
-    <label for="saida">Saída</label>
-    <input type="radio" id="saida" name="tipo" value="saida" @if($ocorrencia->tipo == "saida")checked @endif><br>
-    <label for="entrada">Entrada</label>
-    <input type="radio" id="entrada" name="tipo" value="entrada" @if($ocorrencia->tipo == "entrada")checked @endif><br>
-    <label for="registro">Registro</label>
-    <input type="radio" id="registro" name="tipo" value="registro" @if($ocorrencia->tipo == "registro")checked @endif>
-    <br>
+@foreach ($ocorrencia->tipos() as $tipo)
+    <label for="{{ $tipo }}">{{ $tipo }}</label>
+    <input type="radio" id="tipo" name="tipo" value="{{ $tipo }}" @if($ocorrencia->tipo == "$tipo")checked @endif><br>
+@endforeach  
 
+<br>
 <button type="submit">Enviar</button>

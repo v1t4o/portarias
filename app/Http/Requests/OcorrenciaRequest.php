@@ -3,6 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Ocorrencia;
+
+use Illuminate\Validation\Rule;
 
 class OcorrenciaRequest extends FormRequest
 {
@@ -23,11 +26,12 @@ class OcorrenciaRequest extends FormRequest
      */
     public function rules()
     {
+        $ocorrencia = new Ocorrencia;
         return [
             'patrimonio' => '',
             'data_ocorrencia' => 'required',
             'numero_serie' => '',
-            'tipo' => 'required',
+            'tipo' => ['required',Rule::in($ocorrencia->tipos())],
             'comentario' => '',
         ];
     }

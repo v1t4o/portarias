@@ -6,6 +6,7 @@ use App\Ocorrencia;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests\OcorrenciaRequest;
+use Illuminate\Validation\Rule;
 
 class OcorrenciaController extends Controller
 {
@@ -16,14 +17,37 @@ class OcorrenciaController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->search != null) {
- 
-            $pesquisa = implode('-',array_reverse(explode('/',$request->search)));   
+        $ocorrencia = new Ocorrencia;
+
+        if ($request->data_ocorrencia != null && $request->tipo != null){
+
+            $request->validate([
+                'data_ocorrencia' => 'data',
+                'tipo' => ['required',Rule::in($ocorrencia->tipos())],
+            ]);
+
+            $pesquisa = implode('-',array_reverse(explode('/',$request->data_ocorrencia)));   
+            $ocorrencias = Ocorrencia::whereDate('data_ocorrencia', $pesquisa)
+                                     ->where('tipo', $request->tipo)->paginate(10);
+
+        }else if($request->data_ocorrencia != null) {
+            // Garantir que o campo esta no formato: DD/MM/YYYY
+            $request->validate([
+                'data_ocorrencia' => 'data',
+            ]);
+
+            $pesquisa = implode('-',array_reverse(explode('/',$request->data_ocorrencia)));   
             $ocorrencias = Ocorrencia::whereDate('data_ocorrencia', $pesquisa)->paginate(10);
-        } else {
+        }else if($request->tipo != null) {
+            $ocorrencias = Ocorrencia::where('tipo', $request->tipo)->paginate(10);   
+        }else {
             $ocorrencias = Ocorrencia::paginate(10);
-        }        
-        return view('ocorrencias.index')->with("ocorrencias",$ocorrencias); 
+        }      
+          
+        return view('ocorrencias.index')->with([
+            "ocorrencias" => $ocorrencias,
+            "ocorrencia" => new Ocorrencia
+        ]); 
 
     }
 
@@ -91,17 +115,16 @@ class OcorrenciaController extends Controller
      * @param  \App\Ocorrencia  $ocorrencia
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ocorrencia $ocorrencia)
+    public function update(OcorrenciaRequest $request, Ocorrencia $ocorrencia)
     {
-        $ocorrencia->patrimonio = $request->patrimonio;
-        $ocorrencia->data_ocorrencia = Carbon::CreatefromFormat('d/m/Y H:i', "$request->data_ocorrencia $request->horario_ocorrencia");
-        $ocorrencia->numero_serie = $request->numero_serie;
-        $ocorrencia->tipo = $request->tipo;
-        $ocorrencia->comentario = $request->comentario;
-        $ocorrencia->user_id = 1;
-        $ocorrencia->save();
+        $validated = $request->validated();
 
+        $validated['data_ocorrencia'] = Carbon::CreatefromFormat('d/m/Y H:i', "$request->data_ocorrencia $request->horario_ocorrencia");
+        $validated['user_id'] = 1;
+        $ocorrencia->update($validated);
+        
         return redirect("/ocorrencias/$ocorrencia->id");
+
     }
 
     /**
