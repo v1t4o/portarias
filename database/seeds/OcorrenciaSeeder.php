@@ -34,6 +34,6 @@ class OcorrenciaSeeder extends Seeder
 
         Ocorrencia::create($ocorrencia2);
 
-        factory(Ocorrencia::class, 10000)->create();
+        factory(Ocorrencia::class, 100)->create();
     }
 }
