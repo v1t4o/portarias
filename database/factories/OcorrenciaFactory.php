@@ -7,7 +7,9 @@ use Faker\Generator as Faker;
 use App\User;
 
 $factory->define(Ocorrencia::class, function (Faker $faker) {
-    $tipos = ['saida','entrada','registro']; 
+    $ocorrencia = new Ocorrencia;
+    $tipos = $ocorrencia->tipos(); 
+
     return [
         'patrimonio' => $faker->numberBetween($min = 1000, $max = 9000),
         'tipo' => $tipos[array_rand($tipos)],  
