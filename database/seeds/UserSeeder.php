@@ -22,10 +22,9 @@ class UserSeeder extends Seeder
         ];
 
         $pessoausp = [
-            'name' => 'Ana',
+            'name' => 'Thiago',
             'email' => 'thiagoa@usp.br',
             'codpes' => '5385361',
-
         ];
 
         User::create($vigia);

@@ -14,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/ocorrencias','OcorrenciaController');
+Route::resource('/users','UserController');
