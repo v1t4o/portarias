@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-        ];
+            'name' => 'required',
+            'email' => 'required|email|unique',
+            "codpes" => "exclude_unless:codigo_vigia,null,|required|unique|codpes",
+            "codigo_vigia" => 'exclude_unless:codpes,null,|required|unique',
+        ]; 
     }
 }
