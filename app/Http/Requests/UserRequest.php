@@ -25,9 +25,15 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique',
-            "codpes" => "exclude_unless:codigo_vigia,null,|required|unique|codpes",
-            "codigo_vigia" => 'exclude_unless:codpes,null,|required|unique',
+            'email' => 'required|email|unique:users,email',
+            'codpes' => [
+                'required_without:codigo_vigia',
+                'unique:users,codpes',
+            ],
+            'codigo_vigia' => [
+                'required_without:codpes',
+                'unique:users,codigo_vigia',
+            ],
         ]; 
     }
 }
