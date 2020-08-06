@@ -13,9 +13,74 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = new User;
+
+        if ($request->tipo != null && $request->tipo == 'Nome'){
+
+            $users = User::where('name','LIKE',"%{$request->busca}%")->paginate(10);   
+
+        }else if($request->tipo != null && $request->tipo == 'CodigoPessoa'){
+
+            $users = User::where('codpes','LIKE',"%{$request->busca}%")->paginate(10);
+        
+        }else if($request->tipo != null && $request->tipo == 'CodigoVigia'){
+
+            $users = User::where('codigo_vigia','LIKE',"%{$request->busca}%")->paginate(10);
+
+        }          
+            
+        else {
+
+            $users = User::paginate(10);
+        }      
+
+                /*
+        
+        if ($request->buscar != null && $request->tipobusca = 'nome'){
+
+            $users = User::where('name','LIKE',"%{$request->buscar}%")->paginate(10);  
+        }
+
+        if($request->buscar != null && $request->tipobusca = 'codigopessoa'){
+
+            $users = User::where('codpes',"LIKE","%{$request->buscar}%")->paginate(10);
+        }
+
+        if($request->buscar != null && $request->tipobusca = 'codigovigia'){
+
+            $users = User::where('codigo_vigia',"LIKE","%{$request->busca}%")->paginate(10);
+        } 
+        
+        */  
+        
+
+
+        /*
+        
+        if ($request->busca != null && $request->tipobusca != 'Nome'){
+
+            $users = User::where('name',"LIKE","%{$request->busca}%")->paginate(10);   
+
+        }else if($request->busca != null && $request->tipobusca == 'Codigo_Pessoa'){
+
+            $users = User::where('codpes',"LIKE","%{$request->busca}%")->paginate(10);
+        
+        }else if($request->busca != null && $request->tipobusca == 'Codigo_Vigia'){
+
+            $users = User::where('codigo_vigia',"LIKE","%{$request->busca}%")->paginate(10);
+
+        } 
+        
+        */
+
+
+        return view('users.index')->with([
+            'users' => $users,
+            'user' => new User
+        ]); 
+
     }
 
     /**
@@ -48,9 +113,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return view('users.show')->with('user', $user);
+        //
     }
 
     /**
