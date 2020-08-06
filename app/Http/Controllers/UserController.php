@@ -17,6 +17,10 @@ class UserController extends Controller
     {
         $user = new User;
 
+        if($request->busca != null){
+            $users = User::where('codigo_vigia','LIKE',"%{$request->busca}%")->paginate(10);
+        }
+        /*
         if ($request->tipo != null && $request->tipo == 'Nome'){
 
             $users = User::where('name','LIKE',"%{$request->busca}%")->paginate(10);   
@@ -30,7 +34,7 @@ class UserController extends Controller
             $users = User::where('codigo_vigia','LIKE',"%{$request->busca}%")->paginate(10);
 
         }          
-            
+            */
         else {
 
             $users = User::paginate(10);
@@ -102,7 +106,8 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $validated = $request->validated();
-        User::create($validated);
+        $validated['password'] = bcrypt($validated['password']);
+        $user = User::create($validated);
 
         return redirect('/users/');
     }

@@ -40,7 +40,7 @@
       -->
 
     <div class=" col-sm input-group">
-      <input type="text" value="{{Request()->busca}}" autocomplete="off">
+      <input type="text" value="{{Request()->busca}}" name="busca" autocomplete="off">
 
       <span class="input-group-btn">
         <button type="submit" class="btn btn-success"> Buscar </button>

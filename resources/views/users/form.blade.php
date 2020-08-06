@@ -15,7 +15,11 @@
 
 
 <label for="password">Senha:</label>
-<input type="text" name="password" value="{{old('password', $user->password)}}" id="password"><br>
+<input type="password" name="password" id="password"><br>
+
+<br>
+<label for="password">Repetir Senha:</label>
+<input type="password" name="password_repeat"><br>
 
 <br>
 <button type="submit">Enviar</button>

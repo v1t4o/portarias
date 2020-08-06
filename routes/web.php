@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/ocorrencias','OcorrenciaController');
 Route::resource('/users','UserController');
+
+# rotas de login
+Route::get('login', 'LoginController@showLoginForm')->name('login');
+Route::post('login', 'LoginController@login');

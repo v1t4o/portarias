@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->integer('codigo_vigia')->unique()->nullable();
+            $table->string('codigo_vigia')->unique()->nullable();
             $table->string('codpes')->unique()->nullable();
             $table->rememberToken();
             $table->timestamps();

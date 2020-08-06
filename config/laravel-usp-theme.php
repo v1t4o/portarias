@@ -40,23 +40,8 @@ return [
             'url'  => '/ocorrencias'
         ],
         [
-            'text' => 'Item 2',
-            'url'  => '/item2',
-            'can'  => '',
-        ],
-        [
-            'text' => 'Item 3',
-            'url'  => '/item3',
-            'can'  => 'admin',
-        ],
-        [
-            'text'    => 'SubMenu1',
-            'submenu' => $submenu1,
-        ],
-        [
-            'text'    => 'SubMenu2',
-            'submenu' => $submenu2,
-            'can'  => 'admin',
+            'text' => 'Usuários',
+            'url'  => '/users',
         ]
     ]
 ];

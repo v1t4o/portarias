@@ -26,14 +26,19 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'password' => 'same:password_repeat',
+            'codpes' => '',
+            'codigo_vigia' => 'nullable|integer',
+            /*
             'codpes' => [
-                'required_without:codigo_vigia',
+                'nullable,required_without:codigo_vigia',
                 'unique:users,codpes',
             ],
             'codigo_vigia' => [
-                'required_without:codpes',
+                'nullable,required_without:codpes',
                 'unique:users,codigo_vigia',
             ],
+            */
         ]; 
     }
 }
