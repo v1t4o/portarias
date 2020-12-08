@@ -1,7 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
-use App\Ocorrencia;
+use App\Models\Ocorrencia;
 
 class OcorrenciaSeeder extends Seeder
 {
@@ -33,6 +35,6 @@ class OcorrenciaSeeder extends Seeder
 
         Ocorrencia::create($ocorrencia2);
 
-        factory(Ocorrencia::class, 100)->create();
+        Ocorrencia::factory(100)->create();
     }
 }

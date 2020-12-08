@@ -1,22 +1,39 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
-use App\Ocorrencia;
-use Faker\Generator as Faker;
-use App\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Ocorrencia;
+use App\Models\User;
 
-$factory->define(Ocorrencia::class, function (Faker $faker) {
-    $ocorrencia = new Ocorrencia;
-    $tipos = $ocorrencia->tipos(); 
+class OcorrenciaFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Ocorrencia::class;
 
-    return [
-        'patrimonio' => $faker->numberBetween($min = 1000, $max = 9000),
-        'tipo' => $tipos[array_rand($tipos)],  
-        'comentario' => $faker->sentence,
-        'user_id' => factory(User::class)->create()->id,
-        'data_ocorrencia' => $faker->dateTime, 
-    ];
-});
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        $ocorrencia = new Ocorrencia;
+        $tipos = $ocorrencia->tipos();
+
+        return [
+            'patrimonio' => $this->faker->numberBetween($min = 1000, $max = 9000),
+            'tipo' => $tipos[array_rand($tipos)],  
+            'comentario' => $this->faker->sentence,
+            'user_id' => User::factory()->create()->id,
+            'data_ocorrencia' => $this->faker->dateTime, 
+        ];
+    }
+}
+
 
 
