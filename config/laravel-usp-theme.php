@@ -29,11 +29,11 @@ $submenu2 =  [
 ];
 
 return [
-    'title'=> 'USPdev',
-    'dashboard_url' => '/',
-    'logout_method' => 'GET',
-    'logout_url' => '/logout',
-    'login_url' => '/login',
+    'title' => config('app.name'),
+    'dashboard_url' => config('/'),
+    'logout_method' => 'POST',
+    'logout_url' => config('app.url') . '/logout',
+    'login_url' => config('app.url') . '/login',
     'menu' => [
         [
             'text' => 'Ocorrências',
@@ -42,6 +42,6 @@ return [
         [
             'text' => 'Usuários',
             'url'  => '/users',
-        ]
+        ],
     ]
 ];
