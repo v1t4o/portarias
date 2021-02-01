@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Ocorrencia;
+use App\Models\Ocorrencia;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests\OcorrenciaRequest;

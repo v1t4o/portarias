@@ -30,7 +30,7 @@ $submenu2 = [
 
 return [
     'title' => config('app.name'),
-    'dashboard_url' => config('app.url'),
+    'dashboard_url' => config('/'),
     'logout_method' => 'POST',
     'logout_url' => config('app.url') . '/logout',
     'login_url' => config('app.url') . '/login',
@@ -61,10 +61,17 @@ return [
     ],
     'right_menu' => [
         [
+<<<<<<< HEAD
             'text' => '<i class="fas fa-cog"></i>',
             'title' => 'Configurações',
             'target' => '_blank',
             'url' => config('app.url') . '/item1',
         ],
     ],
+=======
+            'text' => 'Usuários',
+            'url'  => '/users',
+        ],
+    ]
+>>>>>>> upstream/master
 ];

@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Ocorrencia;
+use App\Models\Ocorrencia;
 
 use Illuminate\Validation\Rule;
 
